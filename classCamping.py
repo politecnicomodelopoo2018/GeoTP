@@ -64,7 +64,8 @@ class Camping(object):
         self.countrycode = countrycode
 
     def setCoordinates(self, coordinates):
-        self.coordinates = coordinates
+        self.coordinates.append(coordinates[1])
+        self.coordinates.append(coordinates[0])
 
     def deserializar(self, dict):
         self.setId(dict["id"])
