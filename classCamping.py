@@ -67,24 +67,38 @@ class Camping(object):
         self.coordinates.append(coordinates[1])
         self.coordinates.append(coordinates[0])
 
+    # No toma capacity, postalcode ni marks. RE MISTERIOSO!
     def deserializar(self, dict):
         self.setId(dict["id"])
-        self.setDocumentname(dict["propierties"]["documentname"])
-        self.setTemplatetype(dict["propierties"]["templatetype"])
-        self.setTurismdescription(dict["propierties"]["turismdescription"])
+        self.setDocumentname(dict["properties"]["documentname"])
+        self.setTemplatetype(dict["properties"]["templatetype"])
+        self.setTurismdescription(dict["properties"]["turismdescription"])
         self.setAddress(dict["properties"]["address"])
-        self.setMarks(dict["propierties"]["marks"])
-        self.setWeb(dict["propierties"]["web"])
-        self.setLodgingtype(dict["propierties"]["lodgingtype"])
-        self.setCategory(dict["propierties"]["category"])
-        self.setCapacity(dict["propierties"]["capacity"])
-        self.setPostalcode(dict["propierties"]["postalcode"])
-        self.setMunicipality(dict["propierties"]["municipality"])
-        self.setMunicipalitycode(dict["propierties"]["municipalitycode"])
-        self.setCountry(dict["propierties"]["country"])
-        self.setCountrycode(dict["propierties"]["countrycode"])
+        if "marks" in dict["properties"]:
+            self.setMarks(dict["properties"]["marks"])
+        self.setWeb(dict["properties"]["web"])
+        self.setLodgingtype(dict["properties"]["lodgingtype"])
+        self.setCategory(dict["properties"]["category"])
+        if "capacity" in dict["properties"]:
+            self.setCapacity(dict["properties"]["capacity"])
+        if "postalcode" in dict["properties"]:
+            self.setPostalcode(dict["properties"]["postalcode"])
+        self.setMunicipality(dict["properties"]["municipality"])
+        self.setMunicipalitycode(dict["properties"]["municipalitycode"])
+        self.setCountry(dict["properties"]["country"])
+        self.setCountrycode(dict["properties"]["countrycode"])
         # Coordenadas
-        self.setCoordinates(dict["coordinates"])
+        self.setCoordinates(dict["geometry"]["coordinates"])
+
+    @staticmethod
+    def getListaFromMongo(dict):
+        listaCampings = []
+        for item in dict:
+            camping = Camping()
+            camping.deserializar(item)
+            listaCampings.append(camping)
+            print(item["properties"]["municipalitycode"])
+        return listaCampings
 
 
 

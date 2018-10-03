@@ -1,4 +1,25 @@
 from flask import *
+from pymongo import *
+from classCamping import *
+
+
+
+
+client = MongoClient('localhost', 27017)
+db = client.GeoTP
+campings = db.campings
+dict = campings.find_one({},{"features":1})
+
+
+listaCampings = Camping.getListaFromMongo(dict["features"])
+
+
+for item in listaCampings:
+    print(item.capacity)
+
+
+
+
 
 app = Flask(__name__, static_url_path='/static')
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
