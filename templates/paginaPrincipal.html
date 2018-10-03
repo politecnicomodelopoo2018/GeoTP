@@ -5,6 +5,11 @@
     <title>paginaPrincipal</title>
 </head>
 <body>
-<a href="/camping"> Go to Camping</a>
+
+<ul>
+{% for item in listaCampings %}
+    <li><a href="/camping?campingId={{item.id}}"> {{item.documentname}}</a></li>
+{% endfor %}
+</ul>
 </body>
 </html>

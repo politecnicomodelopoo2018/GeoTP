@@ -100,7 +100,17 @@ class Camping(object):
             print(item["properties"]["municipalitycode"])
         return listaCampings
 
+    @staticmethod
+    def getAllCampings(collection):
+        dict = collection.find_one({}, {"features": 1})
+        Lista = Camping.getListaFromMongo(dict)
+        return Lista
 
-
+    @staticmethod
+    def getCamping(collection, campingId):
+        dict = collection.find_one({"features":{"properites": {"id":campingId}}}, {"features": 1})
+        camping = Camping()
+        camping.deserializar(dict)
+        return camping
 
 

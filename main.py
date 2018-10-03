@@ -11,12 +11,10 @@ campings = db.campings
 dict = campings.find_one({},{"features":1})
 
 
-listaCampings = Camping.getListaFromMongo(dict["features"])
+comandoloco = db.campings.find_one({"features[0].id": 1})
 
 
-for item in listaCampings:
-    print(item.capacity)
-
+print(comandoloco)
 
 
 
@@ -31,11 +29,11 @@ def Index():
 
 @app.route('/paginaPrincipal')
 def paginaPrincipal():
-    return render_template("paginaPrincipal.html")
+    return render_template("paginaPrincipal.html", listaCampings=Camping.getListaFromMongo(dict["features"]))
 
 @app.route('/camping')
-def Camping():
-    return render_template("camping.html")
+def CampingPage():
+    return render_template("camping.html", camping=Camping.getCamping(campings, int(request.args.get("campingId"))))
 
 
 
