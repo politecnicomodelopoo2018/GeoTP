@@ -91,13 +91,13 @@ class Camping(object):
         self.setCoordinates(dict["geometry"]["coordinates"])
 
     @staticmethod
-    def getListaFromMongo(dict):
+    def getListaFromMongo(campings):
+        dict = campings.find_one({}, {"features": 1})
         listaCampings = []
-        for item in dict:
+        for item in dict["features"]:
             camping = Camping()
             camping.deserializar(item)
             listaCampings.append(camping)
-            print(item["properties"]["municipalitycode"])
         return listaCampings
 
     @staticmethod
@@ -108,7 +108,7 @@ class Camping(object):
 
     @staticmethod
     def getCamping(collection, campingId):
-        dict = collection.find_one({"features":{"properites": {"id":campingId}}}, {"features": 1})
+        dict = collection.find_one({"features}":{"properites": {"id":campingId}}}, {"features": 1})
         camping = Camping()
         camping.deserializar(dict)
         return camping

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Camping Generico</title>
+     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
+   integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+   crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"
+   integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
+   crossorigin=""></script>
+
+</head>
+
+
+
+
+
+<style>
+  #mapid {
+    width: 100%;
+    height: 580px;
+    box-shadow: 5px 5px 5px #888;
+ }
+</style>
+
+<body>
+Hola
+
+
+ <div id="mapid">
+     <script>
+
+     var mymap = L.map('mapid').setView([43.30512164, -2.37855921], 13);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png?{foo}', {foo: 'bar'}).addTo(mymap);
+        {% for camping in listaCampings %}
+        var marker = L.marker([{{camping.coordinates[0]}}, {{camping.coordinates[1]}}]).addTo(mymap);
+        {% endfor %}
+
+     </script>
+ </div>
+
+</body>
+
+
+</html>

@@ -7,6 +7,7 @@
 <body>
 
 <ul>
+    <a href="/allCampings">All Campings</a>
 {% for item in listaCampings %}
     <li><a href="/camping?campingId={{item.id}}"> {{item.documentname}}</a></li>
 {% endfor %}

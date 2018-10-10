@@ -8,13 +8,14 @@ from classCamping import *
 client = MongoClient('localhost', 27017)
 db = client.GeoTP
 campings = db.campings
-dict = campings.find_one({},{"features":1})
 
 
-comandoloco = db.campings.find_one({"features[0].id": 1})
 
 
-print(comandoloco)
+olcampings = Camping.getListaFromMongo(campings)
+
+
+print(olcampings[0].id)
 
 
 
@@ -29,11 +30,15 @@ def Index():
 
 @app.route('/paginaPrincipal')
 def paginaPrincipal():
-    return render_template("paginaPrincipal.html", listaCampings=Camping.getListaFromMongo(dict["features"]))
+    return render_template("paginaPrincipal.html", listaCampings=Camping.getListaFromMongo(campings))
 
 @app.route('/camping')
 def CampingPage():
     return render_template("camping.html", camping=Camping.getCamping(campings, int(request.args.get("campingId"))))
+
+@app.route('/allCampings')
+def allCampings():
+    return render_template("allCampings.html", listaCampings=Camping.getListaFromMongo(campings))
 
 
 
