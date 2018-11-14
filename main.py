@@ -15,7 +15,28 @@ campings = db.campings
 olcampings = Camping.getListaFromMongo(campings)
 
 
-print(olcampings[0].id)
+lula = Camping()
+lula.setId(800)
+lula.setCoordinates([-34.584620, -58.485515])
+lula.setDocumentname("LULA CAMPING")
+lula.setTurismdescription("es muy bueno")
+lula.setTemplatetype("Alojamientos")
+lula.setAddress("Av.Sabattini 1203")
+lula.setMarks("Montes y Valles argentinos")
+lula.setWeb("www.google.com")
+lula.setLodgingtype("camping")
+lula.setCategory("campin")
+lula.setCapacity("10")
+lula.setPostalcode("1111")
+lula.setMunicipality("lomarmota")
+lula.setMunicipalitycode("1234")
+lula.setCountry("Argentina")
+lula.setCountrycode("10")
+lula.subir(campings)
+
+
+
+
 
 
 
@@ -40,6 +61,13 @@ def CampingPage():
 def allCampings():
     return render_template("allCampings.html", listaCampings=Camping.getListaFromMongo(campings))
 
+@app.route('/altaCamping')
+def altaCamping():
+    return render_template("altaCamping.html")
+
+@app.route('/subir')
+def subir():
+    pass
 
 
 

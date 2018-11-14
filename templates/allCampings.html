@@ -25,9 +25,6 @@
 </style>
 
 <body>
-Hola
-
-
  <div id="mapid">
      <script>
 
@@ -35,6 +32,7 @@ Hola
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png?{foo}', {foo: 'bar'}).addTo(mymap);
         {% for camping in listaCampings %}
         var marker = L.marker([{{camping.coordinates[0]}}, {{camping.coordinates[1]}}]).addTo(mymap);
+        marker.bindPopup("<b>{{camping.documentname}}</b><br>{{camping.address}}<br><a target='_blank' rel='noopener noreferrer' href={{camping.web}}>Pagina Oficial</a><br>{{camping.turismdescription}}")
         {% endfor %}
 
      </script>

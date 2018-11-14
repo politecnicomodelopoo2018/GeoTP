@@ -113,4 +113,36 @@ class Camping(object):
         camping.deserializar(dict)
         return camping
 
-
+    def subir(self, collection):
+        collection.find_one_and_update({'type':'FeatureCollection'},{'$push':{'features':{
+            "id" : self.id,
+            "type" : "Feature",
+            "geometry" : {
+              "type" : "Point",
+              "coordinates" : self.coordinates
+            },
+            "properties" : {
+              "documentname" : self.documentname,
+              "turismdescription" : self.turismdescription,
+              "templatetype" : self.templatetype,
+              "address" : self.address,
+              "marks" : self.marks,
+              "web" : self.web,
+              "lodgingtype" : self.lodgingtype,
+              "category" : self.category,
+              "capacity" : self.capacity,
+              "postalcode" : self.postalcode,
+              "municipality" : self.municipality,
+              "municipalitycode" : self.municipalitycode,
+              "country" : self.country,
+              "countrycode" : self.countrycode,
+              "friendlyurl" : "http://opendata.euskadi.eus/catalogo/-/es/alojamientos/camping-camping-angosto/",
+              "physicalurl" : "http://opendata.euskadi.eus/catalogo/contenidos/a_alojamiento/0000000654_a1_rec_turismo/es_654/654-ficha2.html",
+              "dataxml" : "http://opendata.euskadi.eus/contenidos/a_alojamiento/0000000654_a1_rec_turismo/es_654/data/654_openData.xml",
+              "metadataxml" : "http://opendata.euskadi.eus/contenidos/a_alojamiento/0000000654_a1_rec_turismo/r01Index/0000000654_a1_rec_turismo-idxContent.xml",
+              "zipfile" : "http://opendata.euskadi.eus/contenidos/a_alojamiento/0000000654_a1_rec_turismo/opendata/0000000654_a1_rec_turismo.zip"
+            }
+            }
+        }
+        }
+        )
